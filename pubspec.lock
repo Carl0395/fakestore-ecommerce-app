@@ -263,7 +263,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "60a6bcea1813d4ab74d64edd8b5cf980ec7b3880"
+      resolved-ref: fe6db4e9738ab9bc3b4153ce6d28ebdf437c97bf
       url: "https://github.com/Carl0395/fake_store_package.git"
     source: git
     version: "0.0.1"
@@ -469,6 +469,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  mocktail:
+    dependency: transitive
+    description:
+      name: mocktail
+      sha256: "890df3f9688106f25755f26b1c60589a92b3ab91a22b8b224947ad041bf172d8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   package_config:
     dependency: transitive
     description:
