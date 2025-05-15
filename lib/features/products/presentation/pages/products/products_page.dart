@@ -1,10 +1,7 @@
-import 'package:ecommerce_system_design/atoms/custom_shimmer.dart';
 import 'package:ecommerce_system_design/ecommerce_system_design.dart';
 import 'package:ecommerce_system_design/foundation/app_spacing.dart';
-import 'package:ecommerce_system_design/molecules/ad_widget.dart';
 import 'package:ecommerce_system_design/organisms/products_grid.dart';
 import 'package:fake_e_commerce/core/route/routes.dart';
-import 'package:fake_e_commerce/features/products/presentation/pages/products/search.dart';
 import 'package:fake_e_commerce/features/products/presentation/pages/products/widgets/product_card.dart';
 import 'package:fake_e_commerce/features/products/presentation/providers/category_provider.dart';
 import 'package:fake_e_commerce/features/products/presentation/providers/filter_query_provider.dart';

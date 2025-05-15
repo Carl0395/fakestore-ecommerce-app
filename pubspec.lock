@@ -246,7 +246,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: de71c03669002bbf5ee607a8da851659d7cef67b
+      resolved-ref: "2a6e6e98c4bdc03ab9bd4bb7e4a37cbb32c1c3a3"
       url: "https://github.com/Carl0395/ecommerce_system_design.git"
     source: git
     version: "0.0.1"
