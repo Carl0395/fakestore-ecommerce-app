@@ -18,6 +18,10 @@ Aplicación de comercio electrónico desarrollada con Flutter, que utiliza la Fa
     - [Autenticación:](#autenticación)
     - [Registro:](#registro)
   - [📄 Licencia](#-licencia)
+- [🧪 Pruebas de integración en `fake_e_commerce` app](#-pruebas-de-integración-en-fake_e_commerce-app)
+  - [📁 Estructura de Pruebas](#-estructura-de-pruebas)
+  - [🧰 Herramientas Utilizadas](#-herramientas-utilizadas)
+  - [🚀 Ejecución de Pruebas](#-ejecución-de-pruebas)
 
 ## ✨ Características
 
@@ -124,3 +128,29 @@ Permite crear una cuenta de usuario
 ## 📄 Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+
+# 🧪 Pruebas de integración en `fake_e_commerce` app
+
+Este paquete incluye una suite de pruebas de integración para garantizar la fiabilidad y robustez de la app. A continuación, se detallan las pruebas implementadas y cómo ejecutarlas.
+
+## 📁 Estructura de Pruebas
+
+Las pruebas se encuentran en el directorio `integration_test/` y cubren los siguientes módulos:
+
+- **`app_test.dart`**: Archivo principal que contiene todas las pruebas
+- **`filter_products_test.dart`**: Prueba el flujo de la app al filtrar y encontrar un elemento en la lista
+- **`navigate_to_cart_test`**: Prueba navegación hacia el carrito de compra
+- **`select_category_test`**: Prueba seleccionar una categoría de productos
+- **`show_detail_product_test`**: Prueba visualización del detalle de un producto
+
+## 🧰 Herramientas Utilizadas
+
+- **Framework de Pruebas**: [integration_test](https://docs.flutter.dev/testing/integration-tests)
+
+## 🚀 Ejecución de Pruebas
+
+Para ejecutar todas las pruebas de integración, utiliza el siguiente comando en la raíz del proyecto:
+
+```bash
+flutter test integration_test/app_test.dart
