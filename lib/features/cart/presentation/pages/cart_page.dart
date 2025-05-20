@@ -27,6 +27,7 @@ class CartPage extends ConsumerWidget {
                 return product.when(
                   data: (data) {
                     return CartItem(
+                      key: Key('cart_item_${data?.id}'),
                       title: data?.title,
                       urlImage: data?.image,
                       count: cartItem.quantity,

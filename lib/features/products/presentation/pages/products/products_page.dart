@@ -122,9 +122,13 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                     ),
                 data:
                     (items) => ProductsGrid(
+                      key: const Key('products_grid'),
                       items: items,
                       itemBuilder: (c, product) {
-                        return ProductCard(product: product);
+                        return ProductCard(
+                          key: Key('card_${product.id}'),
+                          product: product,
+                        );
                       },
                     ),
               ),
