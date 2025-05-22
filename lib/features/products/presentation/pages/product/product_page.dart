@@ -3,19 +3,21 @@ import 'package:ecommerce_system_design/ecommerce_system_design.dart';
 import 'package:ecommerce_system_design/foundation/app_colors.dart';
 import 'package:ecommerce_system_design/foundation/app_spacing.dart';
 import 'package:ecommerce_system_design/foundation/app_typography.dart';
+import 'package:fake_e_commerce/core/extensions/widget_ref_parametrized_extension.dart';
 import 'package:fake_store_package/models/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends ConsumerWidget {
   final ProductModel product;
   const ProductPage({super.key, required this.product});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Details'),
+        title: Text(ref.text.details),
         centerTitle: false,
         backgroundColor: Colors.white,
       ),
@@ -32,13 +34,20 @@ class ProductPage extends StatelessWidget {
                 SizedBox(height: 40),
                 Center(child: Image.network(product.image ?? '', height: 250)),
                 SizedBox(height: 20),
-                CustomTitle(text: product.title, padding: EdgeInsets.zero),
+                CustomTitle(
+                  text: product.title,
+                  padding: EdgeInsets.zero,
+                  color: ref.theme.textTitle,
+                ),
                 SizedBox(height: 10),
                 Row(
                   children: [
                     Text(
                       '\$${product.price.toString()}',
-                      style: AppTypography.title.copyWith(fontSize: 24),
+                      style: AppTypography.title.copyWith(
+                        fontSize: 24,
+                        color: ref.theme.textTitle,
+                      ),
                     ),
                     Spacer(),
                     Counter(value: 1),
@@ -52,7 +61,7 @@ class ProductPage extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: 'Category: ',
-                            style: TextStyle(color: AppColors.primaryColor),
+                            style: TextStyle(color: ref.theme.primaryColor),
                           ),
                           TextSpan(text: product.category),
                         ],
@@ -77,7 +86,10 @@ class ProductPage extends StatelessWidget {
                 SizedBox(height: 10),
                 Text(product.description ?? '', style: AppTypography.body),
                 SizedBox(height: 20),
-                CustomTextButton(text: 'Add to cart'),
+                CustomTextButton(
+                  text: 'Add to cart',
+                  colorButton: ref.theme.primaryButton,
+                ),
                 SizedBox(height: 100),
               ],
             ),

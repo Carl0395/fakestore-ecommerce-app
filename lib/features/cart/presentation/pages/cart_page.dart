@@ -1,5 +1,6 @@
 import 'package:ecommerce_system_design/molecules/cart_item.dart';
 import 'package:ecommerce_system_design/organisms/cart_list.dart';
+import 'package:fake_e_commerce/core/extensions/widget_ref_parametrized_extension.dart';
 import 'package:fake_e_commerce/features/cart/presentation/providers/cart_provider.dart';
 import 'package:fake_e_commerce/features/products/presentation/providers/products_provider.dart';
 import 'package:fake_store_package/models/product_quantity_model.dart';
@@ -15,7 +16,7 @@ class CartPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cartData = ref.watch(getCartByIdProvider(_defaultCart));
     return Scaffold(
-      appBar: AppBar(title: const Text('Cart'), centerTitle: false),
+      appBar: AppBar(title: Text(ref.text.cart), centerTitle: false),
       body: cartData.when(
         data:
             (data) => CartList<ProductQuantityModel>(
@@ -33,6 +34,7 @@ class CartPage extends ConsumerWidget {
                       count: cartItem.quantity,
                       id: data?.id?.toString(),
                       price: data?.price?.toString(),
+                      titleColor: ref.theme.primaryColor,
                     );
                   },
                   error: (error, stackTrace) => CartItem(),

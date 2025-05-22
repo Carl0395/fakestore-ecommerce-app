@@ -3,6 +3,7 @@ import 'package:ecommerce_system_design/atoms/custom_text_button.dart';
 import 'package:ecommerce_system_design/atoms/input.dart';
 import 'package:ecommerce_system_design/foundation/app_spacing.dart';
 import 'package:ecommerce_system_design/foundation/app_typography.dart';
+import 'package:fake_e_commerce/core/extensions/widget_ref_parametrized_extension.dart';
 import 'package:fake_e_commerce/features/account/presentation/providers/account_provider.dart';
 import 'package:fake_e_commerce/shared/dialogs.dart';
 import 'package:fake_store_package/util/failures.dart';
@@ -51,11 +52,11 @@ class RegisterPageState extends ConsumerState<RegisterPage> {
                         curve: curve,
                         style: AppTypography.title.copyWith(
                           fontSize: 32 - bottomOffset * 0.03,
+                          color: ref.theme.textTitle,
                         ),
                         child: Text(
-                          'Crea tu cuenta \nFake Store',
+                          ref.text.createAccount,
                           textAlign: TextAlign.center,
-                          // style: AppTypography.title.copyWith(height: 1.2),
                         ),
                       ),
                       AnimatedContainer(
@@ -64,29 +65,37 @@ class RegisterPageState extends ConsumerState<RegisterPage> {
                         curve: curve,
                       ),
                       Input(
-                        hintText: 'User name',
+                        hintText: ref.text.username,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         controller: usernameController,
+                        borderColor: ref.theme.borderGreen,
                       ),
                       SizedBox(height: 20),
                       Input(
-                        hintText: 'Email',
+                        hintText: ref.text.email,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         controller: emailController,
+                        borderColor: ref.theme.borderGreen,
                       ),
                       SizedBox(height: 20),
                       Input(
-                        hintText: 'Password',
+                        hintText: ref.text.password,
                         obscureText: true,
                         controller: passwordController,
+                        borderColor: ref.theme.borderGreen,
                       ),
                       SizedBox(height: 40),
-                      CustomTextButton(text: 'Register', onTap: createAccount),
+                      CustomTextButton(
+                        text: ref.text.register,
+                        colorButton: ref.theme.primaryButton,
+                        onTap: createAccount,
+                      ),
                       SizedBox(height: 20),
                       CustomLabelButton(
-                        label: 'Already have an account?',
+                        label: ref.text.registered,
+                        color: ref.theme.primaryButton,
                         onTap: () => Navigator.pop(context),
                       ),
                       SizedBox(height: 20),

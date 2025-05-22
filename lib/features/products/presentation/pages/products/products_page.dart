@@ -1,6 +1,7 @@
 import 'package:ecommerce_system_design/ecommerce_system_design.dart';
 import 'package:ecommerce_system_design/foundation/app_spacing.dart';
 import 'package:ecommerce_system_design/organisms/products_grid.dart';
+import 'package:fake_e_commerce/core/extensions/widget_ref_parametrized_extension.dart';
 import 'package:fake_e_commerce/core/route/routes.dart';
 import 'package:fake_e_commerce/features/products/presentation/pages/products/widgets/product_card.dart';
 import 'package:fake_e_commerce/features/products/presentation/providers/category_provider.dart';
@@ -50,16 +51,19 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppBar(
-                title: 'Fake Store App',
+                title: ref.text.appTitle,
                 onCart: () => Navigator.pushNamed(context, Routes.cart),
                 onProfile: () => Navigator.pushNamed(context, Routes.login),
+                titleColor: ref.theme.textTitle,
+                cartButtonColor: ref.theme.tertiaryColor,
+                profileButtonColor: ref.theme.tertiaryColor,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.sidePadding,
                 ),
                 child: Search(
-                  hintText: 'Search',
+                  hintText: ref.text.search,
                   controller: searchController,
                   onFocus: (focus) {
                     focused = focus;
@@ -68,6 +72,7 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                   onChange: (query) {
                     ref.read(filterQueryProvider.notifier).changeQuery(query);
                   },
+                  colorInputText: ref.theme.textBody,
                 ),
               ),
               SizedBox(height: 10),
@@ -83,6 +88,7 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                     label: productAd?.title,
                     imageUrl: productAd?.image,
                     price: productAd?.price?.toString(),
+                    shopButtonColor: ref.theme.primaryButton,
                   ),
                 ),
               ),
@@ -90,7 +96,10 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                 duration: Duration(milliseconds: 300),
                 curve: Curves.easeOut,
                 height: filterActive ? 0 : 60,
-                child: CustomTitle(text: 'Categories'),
+                child: CustomTitle(
+                  text: ref.text.categories,
+                  color: ref.theme.textTitle,
+                ),
               ),
 
               categories.when(
@@ -98,6 +107,7 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                     (data) => TagHorizontalList(
                       tags: data,
                       selectedTag: currentCategory,
+                      selectedColor: ref.theme.primaryButton,
                       onTag:
                           (tag) => ref
                               .read(currentCategoryProvider.notifier)
@@ -110,7 +120,7 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                     ),
               ),
 
-              CustomTitle(text: 'Products'),
+              CustomTitle(text: ref.text.products, color: ref.theme.textTitle),
 
               products.when(
                 error: (error, stackTrace) => Text(error.toString()),
@@ -128,6 +138,9 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                         return ProductCard(
                           key: Key('card_${product.id}'),
                           product: product,
+                          addButtonColor: ref.theme.primaryButton,
+                          ratingIconColor: ref.theme.ratingColor,
+                          titleProductColor: ref.theme.primaryColor,
                         );
                       },
                     ),

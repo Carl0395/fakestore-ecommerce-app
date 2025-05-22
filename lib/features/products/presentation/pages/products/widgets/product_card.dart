@@ -9,7 +9,18 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
-  const ProductCard({super.key, required this.product});
+  final Color? titleProductColor;
+  final Color? priceProductColor;
+  final Color? ratingIconColor;
+  final Color? addButtonColor;
+  const ProductCard({
+    super.key,
+    required this.product,
+    this.titleProductColor,
+    this.priceProductColor,
+    this.ratingIconColor,
+    this.addButtonColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +48,7 @@ class ProductCard extends StatelessWidget {
                       product.title ?? '',
                       maxLines: 2,
                       style: AppTypography.labelSmall.copyWith(
-                        color: AppColors.primaryColor,
+                        color: titleProductColor ?? AppColors.primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -49,7 +60,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       '\$${product.price ?? ''}',
                       style: AppTypography.label.copyWith(
-                        color: AppColors.tertiaryColor,
+                        color: priceProductColor ?? AppColors.tertiaryColor,
                       ),
                     ),
                   ],
@@ -61,7 +72,7 @@ class ProductCard extends StatelessWidget {
                     onTap: () {},
                     size: 36,
                     icon: Icons.add,
-                    color: AppColors.primaryButton,
+                    color: addButtonColor ?? AppColors.primaryButton,
                     iconColor: AppColors.secondaryColor,
                   ),
                 ),

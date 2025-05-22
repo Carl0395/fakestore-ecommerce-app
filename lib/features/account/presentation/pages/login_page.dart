@@ -3,6 +3,7 @@ import 'package:ecommerce_system_design/atoms/custom_text_button.dart';
 import 'package:ecommerce_system_design/atoms/input.dart';
 import 'package:ecommerce_system_design/foundation/app_spacing.dart';
 import 'package:ecommerce_system_design/foundation/app_typography.dart';
+import 'package:fake_e_commerce/core/extensions/widget_ref_parametrized_extension.dart';
 import 'package:fake_e_commerce/core/route/routes.dart';
 import 'package:fake_e_commerce/features/account/presentation/providers/account_provider.dart';
 import 'package:fake_e_commerce/shared/dialogs.dart';
@@ -46,7 +47,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
                         height: 110 - bottomOffset * 0.2,
                       ),
                       Text(
-                        'Welcome to \nFake Store',
+                        ref.text.welcome,
                         textAlign: TextAlign.center,
                         style: AppTypography.title.copyWith(
                           height: 1.2,
@@ -59,22 +60,29 @@ class LoginPageState extends ConsumerState<LoginPage> {
                         height: mq.size.height * 0.35 - bottomOffset * 0.7,
                       ),
                       Input(
-                        hintText: 'Username',
+                        hintText: ref.text.username,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         controller: usernameController,
+                        borderColor: ref.theme.borderGreen,
                       ),
                       SizedBox(height: 20),
                       Input(
-                        hintText: 'Password',
+                        hintText: ref.text.password,
                         controller: passwordController,
                         obscureText: true,
+                        borderColor: ref.theme.borderGreen,
                       ),
                       SizedBox(height: 40),
-                      CustomTextButton(text: 'Login', onTap: () => login(ref)),
+                      CustomTextButton(
+                        text: ref.text.login,
+                        colorButton: ref.theme.primaryButton,
+                        onTap: () => login(ref),
+                      ),
                       SizedBox(height: 20),
                       CustomLabelButton(
-                        label: "Don't have an account?",
+                        label: ref.text.noAccount,
+                        color: ref.theme.primaryButton,
                         onTap:
                             () => Navigator.pushNamed(context, Routes.signUp),
                       ),
