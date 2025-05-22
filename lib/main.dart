@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ecommerce_system_design/foundation/app_colors.dart';
 import 'package:fake_e_commerce/core/app_config/app_config.dart';
 import 'package:fake_e_commerce/core/app_config/app_config_provider.dart';
-import 'package:fake_e_commerce/core/extensions/hex_to_color_extension.dart';
 import 'package:fake_e_commerce/core/extensions/widget_ref_parametrized_extension.dart';
 import 'package:fake_e_commerce/core/route/route_generator.dart';
 import 'package:fake_e_commerce/core/route/routes.dart';

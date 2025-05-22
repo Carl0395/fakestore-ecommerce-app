@@ -1,5 +1,4 @@
 import 'package:ecommerce_system_design/molecules/search.dart';
-import 'package:fake_e_commerce/features/products/presentation/pages/product/product_page.dart';
 import 'package:fake_e_commerce/features/products/presentation/pages/products/products_page.dart';
 import 'package:fake_e_commerce/main.dart' as app;
 import 'package:flutter/material.dart';
