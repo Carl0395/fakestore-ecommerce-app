@@ -22,6 +22,9 @@ Aplicación de comercio electrónico desarrollada con Flutter, que utiliza la Fa
   - [📁 Estructura de Pruebas](#-estructura-de-pruebas)
   - [🧰 Herramientas Utilizadas](#-herramientas-utilizadas)
   - [🚀 Ejecución de Pruebas](#-ejecución-de-pruebas)
+- [📦 Parametrización de la App con JSON](#-parametrización-de-la-app-con-json)
+  - [📁 Estructura parametrización](#-estructura-parametrización)
+  - [⚠️ Importante:](#️-importante)
 
 ## ✨ Características
 
@@ -154,3 +157,42 @@ Para ejecutar todas las pruebas de integración, utiliza el siguiente comando en
 
 ```bash
 flutter test integration_test/app_test.dart
+```
+
+# 📦 Parametrización de la App con JSON
+
+Esta guía muestra cómo parametrizar una app Flutter leyendo un archivo config.json antes de que la app inicie, y usarlo globalmente con Riverpod.
+
+## 📁 Estructura parametrización
+
+```
+fakestore-ecommerce-app/
+├── lib/
+├── core/                                            
+│    ├── app_config/                                 # Gestión cuenta de usuario
+│    │   ├── app_config_provider.dart                # Proveedor para al app_config (sobrescrito en main)
+│    │   ├── app_config.dart                         # Modelo general del app_config.json
+│    │   ├── app_text_config.dart                    # Modelo de textos del app_config.json
+│    │   └── app_theme_config.dart                   # Modelo de colores del app_config.json
+│    └── extensions/
+│        ├── hex_to_color_extension.dart             # Extension de String para converting un color hex a Color
+│        └── widget_ref_parametrized_extension.dart  # Extension del WidgetRef para obtener los textos y colores a traves del ConsumerWidget
+└── main.dart                                        # Carga del archivo json y sobrescritura del proveedor app_config_provider.dart
+```
+
+## ⚠️ Importante:
+
+Estructura del archivo config.json contenido en la carpeta Assets
+
+```json
+{
+   "text": {
+      "appTitle": "Fake Store App",
+      ...
+   },
+   "theme": {
+      "primaryColor": "#14866E",
+      ...
+   }
+}
+```
