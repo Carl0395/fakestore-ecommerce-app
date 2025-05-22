@@ -188,11 +188,11 @@ Estructura del archivo config.json contenido en la carpeta Assets
 {
    "text": {
       "appTitle": "Fake Store App",
-      ...
+      // ...
    },
    "theme": {
       "primaryColor": "#14866E",
-      ...
+      // ...
    }
 }
 ```
