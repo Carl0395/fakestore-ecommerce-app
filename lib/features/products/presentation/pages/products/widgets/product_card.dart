@@ -24,59 +24,88 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap:
-          () => Navigator.pushNamed(
-            context,
-            Routes.productDetail,
-            arguments: product,
-          ),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: CardBox(
-          child: Padding(
-            padding: EdgeInsets.all(AppSpacing.insideCard),
-            child: Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (product.image != null)
-                      Center(child: Image.network(product.image!, height: 100)),
-                    SizedBox(height: 10),
-                    Text(
-                      product.title ?? '',
-                      maxLines: 2,
-                      style: AppTypography.labelSmall.copyWith(
-                        color: titleProductColor ?? AppColors.primaryColor,
-                        fontWeight: FontWeight.bold,
+    return Semantics(
+      container: true,
+      button: true,
+      label: product.title ?? 'Producto',
+      hint: 'Presiona dos veces para ver el detalle del producto',
+      child: GestureDetector(
+        onTap:
+            () => Navigator.pushNamed(
+              context,
+              Routes.productDetail,
+              arguments: product,
+            ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: CardBox(
+            child: Padding(
+              padding: EdgeInsets.all(AppSpacing.insideCard),
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (product.image != null)
+                        ExcludeSemantics(
+                          child: Center(
+                            child: Image.network(product.image!, height: 100),
+                          ),
+                        ),
+                      SizedBox(height: 10),
+                      ExcludeSemantics(
+                        child: Text(
+                          product.title ?? '',
+                          maxLines: 2,
+                          style: AppTypography.labelSmall.copyWith(
+                            color: titleProductColor ?? AppColors.primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 6),
-                    RatingLabel(
-                      rate: product.rating?.rate?.toString() ?? '',
-                      count: product.rating?.count?.toString() ?? '',
-                    ),
-                    Text(
-                      '\$${product.price ?? ''}',
-                      style: AppTypography.label.copyWith(
-                        color: priceProductColor ?? AppColors.tertiaryColor,
+                      SizedBox(height: 6),
+                      Semantics(
+                        label:
+                            'Calificación de ${product.rating?.rate?.toString() ?? ''} estrellas con ${product.rating?.count?.toString() ?? ''} reseñas',
+                        container: true,
+                        excludeSemantics: true,
+                        child: RatingLabel(
+                          rate: product.rating?.rate?.toString() ?? '',
+                          count: product.rating?.count?.toString() ?? '',
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: CircleButton(
-                    onTap: () {},
-                    size: 36,
-                    icon: Icons.add,
-                    color: addButtonColor ?? AppColors.primaryButton,
-                    iconColor: AppColors.secondaryColor,
+                      Semantics(
+                        label: 'Precio: \$${product.price ?? ''}',
+                        excludeSemantics: true,
+                        container: true,
+                        child: Text(
+                          '\$${product.price ?? ''}',
+                          style: AppTypography.label.copyWith(
+                            color: priceProductColor ?? AppColors.tertiaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Semantics(
+                      label: 'Botón añadir al carrito',
+                      hint: 'Presiona dos veces para agregar',
+                      container: true,
+                      excludeSemantics: true,
+                      child: CircleButton(
+                        onTap: () {},
+                        size: 36,
+                        icon: Icons.add,
+                        color: addButtonColor ?? AppColors.primaryButton,
+                        iconColor: AppColors.secondaryColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

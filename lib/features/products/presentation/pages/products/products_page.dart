@@ -57,22 +57,30 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                 titleColor: ref.theme.textTitle,
                 cartButtonColor: ref.theme.tertiaryColor,
                 profileButtonColor: ref.theme.tertiaryColor,
+                semanticProfileLabel: 'Inicio de sesión o registro',
+                semanticCartHint: 'Presiona dos veces para ingresar',
+                semanticCartLabel: 'Carrito de compras',
+                semanticProfileHint: 'Presiona dos veces para ingresar',
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.sidePadding,
                 ),
-                child: Search(
-                  hintText: ref.text.search,
-                  controller: searchController,
-                  onFocus: (focus) {
-                    focused = focus;
-                    setState(() {});
-                  },
-                  onChange: (query) {
-                    ref.read(filterQueryProvider.notifier).changeQuery(query);
-                  },
-                  colorInputText: ref.theme.textBody,
+                child: Semantics(
+                  label: 'Buscador de productos',
+                  excludeSemantics: true,
+                  child: Search(
+                    hintText: ref.text.search,
+                    controller: searchController,
+                    onFocus: (focus) {
+                      focused = focus;
+                      setState(() {});
+                    },
+                    onChange: (query) {
+                      ref.read(filterQueryProvider.notifier).changeQuery(query);
+                    },
+                    colorInputText: ref.theme.textBody,
+                  ),
                 ),
               ),
               SizedBox(height: 10),
@@ -80,15 +88,19 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                 duration: Duration(milliseconds: 300),
                 curve: Curves.easeOut,
                 height: filterActive ? 0 : 180,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sidePadding,
-                  ),
-                  child: AdWidget(
-                    label: productAd?.title,
-                    imageUrl: productAd?.image,
-                    price: productAd?.price?.toString(),
-                    shopButtonColor: ref.theme.primaryButton,
+                child: Semantics(
+                  label: 'Producto destacado o en promoción',
+                  excludeSemantics: true,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.sidePadding,
+                    ),
+                    child: AdWidget(
+                      label: productAd?.title,
+                      imageUrl: productAd?.image,
+                      price: productAd?.price?.toString(),
+                      shopButtonColor: ref.theme.primaryButton,
+                    ),
                   ),
                 ),
               ),
@@ -104,14 +116,17 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
 
               categories.when(
                 data:
-                    (data) => TagHorizontalList(
-                      tags: data,
-                      selectedTag: currentCategory,
-                      selectedColor: ref.theme.primaryButton,
-                      onTag:
-                          (tag) => ref
-                              .read(currentCategoryProvider.notifier)
-                              .changeCategory(tag),
+                    (data) => Semantics(
+                      label: 'Lista de categorías',
+                      child: TagHorizontalList(
+                        tags: data,
+                        selectedTag: currentCategory,
+                        selectedColor: ref.theme.primaryButton,
+                        onTag:
+                            (tag) => ref
+                                .read(currentCategoryProvider.notifier)
+                                .changeCategory(tag),
+                      ),
                     ),
                 error: (error, stackTrace) => Text(error.toString()),
                 loading:
@@ -131,18 +146,21 @@ class ProductsPageState extends ConsumerState<ProductsPage> {
                       child: const CircularProgressIndicator(),
                     ),
                 data:
-                    (items) => ProductsGrid(
-                      key: const Key('products_grid'),
-                      items: items,
-                      itemBuilder: (c, product) {
-                        return ProductCard(
-                          key: Key('card_${product.id}'),
-                          product: product,
-                          addButtonColor: ref.theme.primaryButton,
-                          ratingIconColor: ref.theme.ratingColor,
-                          titleProductColor: ref.theme.primaryColor,
-                        );
-                      },
+                    (items) => Semantics(
+                      label: 'Lista de productos',
+                      child: ProductsGrid(
+                        key: const Key('products_grid'),
+                        items: items,
+                        itemBuilder: (c, product) {
+                          return ProductCard(
+                            key: Key('card_${product.id}'),
+                            product: product,
+                            addButtonColor: ref.theme.primaryButton,
+                            ratingIconColor: ref.theme.ratingColor,
+                            titleProductColor: ref.theme.primaryColor,
+                          );
+                        },
+                      ),
                     ),
               ),
             ],

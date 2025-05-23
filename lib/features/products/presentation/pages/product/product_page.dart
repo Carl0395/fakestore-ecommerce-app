@@ -77,9 +77,15 @@ class ProductPage extends ConsumerWidget {
                       ),
                     ),
                     SizedBox(width: 8),
-                    RatingLabel(
-                      rate: product.rating?.rate?.toString() ?? '',
-                      count: product.rating?.count?.toString() ?? '',
+                    Semantics(
+                      label:
+                          'Calificación de ${product.rating?.rate?.toString() ?? ''} estrellas con ${product.rating?.count?.toString() ?? ''} reseñas',
+                      container: true,
+                      excludeSemantics: true,
+                      child: RatingLabel(
+                        rate: product.rating?.rate?.toString() ?? '',
+                        count: product.rating?.count?.toString() ?? '',
+                      ),
                     ),
                   ],
                 ),
