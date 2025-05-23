@@ -25,6 +25,8 @@ Aplicación de comercio electrónico desarrollada con Flutter, que utiliza la Fa
 - [📦 Parametrización de la App con JSON](#-parametrización-de-la-app-con-json)
   - [📁 Estructura parametrización](#-estructura-parametrización)
   - [⚠️ Importante:](#️-importante)
+- [♿️ Accesibilidad con Semantics en Flutter](#️-accesibilidad-con-semantics-en-flutter)
+  - [🧠 Buenas prácticas aplicadas](#-buenas-prácticas-aplicadas)
 
 ## ✨ Características
 
@@ -196,3 +198,35 @@ Estructura del archivo config.json contenido en la carpeta Assets
    }
 }
 ```
+
+# ♿️ Accesibilidad con Semantics en Flutter
+
+Este proyecto incluye soporte de accesibilidad utilizando el widget Semantics, el cual permite mejorar la experiencia para personas que usan lectores de pantalla como VoiceOver (iOS) o TalkBack (Android).
+
+✅ ¿Qué se ha implementado?
+
+- Lectura de contenido textual importante: título del producto, precio, calificación.
+- Descripción de imágenes: las imágenes del producto están marcadas como contenido visual no decorativo.
+- Botones accesibles: el botón de “Añadir al carrito” tiene una etiqueta (label) y pista (hint) clara.
+- Navegación por secciones: cada sección del ProductCard puede ser leída de forma independiente por el lector de pantalla.
+
+📌 Ejemplo de uso
+
+```dart
+Semantics(
+  label: 'Botón añadir al carrito',
+  hint: 'Presiona dos veces para agregar',
+  button: true,
+  child: IconButton(
+    icon: Icon(Icons.add_shopping_cart),
+    onPressed: () {},
+  ),
+)
+```
+
+## 🧠 Buenas prácticas aplicadas
+
+- Uso de container: true para agrupar semánticas relacionadas.
+- Separación clara de secciones con Semantics independientes.
+- Inclusión de hint para mejorar la interacción por accesibilidad.
+
